@@ -22,33 +22,33 @@ public class AgeCalculatorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String strAge = request.getParameter("age");
+        String strAge = request.getParameter("age");
 
-       request.setAttribute("age", strAge);
+        request.setAttribute("age", strAge);
 
-       if (strAge == null || strAge.equals("")) {
-           request.setAttribute("error", "You must give your current age.");
+        if (strAge == null || strAge.equals("")) {
+            request.setAttribute("error", "You must give your current age.");
 
-           getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
-                   .forward(request, response);
-           return;
-       }
-       else {
-           try {
-               Integer.parseInt(strAge);
-           } catch (NumberFormatException e) {
-               request.setAttribute("error", "You must enter a number.");
-               getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
-                       .forward(request, response);
-               return;
-           }
-       }
+            getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                    .forward(request, response);
+            return;
+        }
+        else {
+            try {
+                Integer.parseInt(strAge);
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", "You must enter a number.");
+                getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                        .forward(request, response);
+                return;
+            }
+        }
 
-       int nextAge = Integer.parseInt(strAge) + 1;
+        int nextAge = Integer.parseInt(strAge) + 1;
 
-       request.setAttribute("valid", "Your age next birthday will be " + nextAge
-               + ".");
-       getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
-               .forward(request, response);
+        request.setAttribute("valid", "Your age next birthday will be " + nextAge
+                + ".");
+        getServletContext().getRequestDispatcher("/WEB-INF/agecalculator.jsp")
+                .forward(request, response);
     }
 }
